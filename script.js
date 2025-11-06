@@ -19,14 +19,14 @@ function getComputerChoice() {
 
 function playRound (humanChoice, compChoice){
     if (humanChoice === compChoice) {
-        result.textContent = "This round is a tie! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
+        result.textContent = "This round is a tie. (Computer chose " + compChoice + " and you chose " + humanChoice + ")";
     }
     else if ((humanChoice == "Rock" && compChoice == "Scissors") || (humanChoice == "Paper" && compChoice == "Rock") || (humanChoice == "Scissors" && compChoice == "Paper")){
-        result.textContent = "You win this round! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
+        result.textContent = "You win this round. (Computer chose " + compChoice + " and you chose " + humanChoice + ")";
         humanScore++;
     }
     else {
-        result.textContent = "Computer wins this round! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
+        result.textContent = "Computer wins this round. (Computer chose " + compChoice + " and you chose " + humanChoice + ")";
         compScore++;
     }
 }
@@ -34,19 +34,19 @@ function playRound (humanChoice, compChoice){
 function gameOver () {
     if (humanScore == 5 || compScore == 5){
         if (humanScore > compScore) {
-            winner.textContent = "You win the game! You had " + humanScore + " points while the Computer had " + compScore + " points.";
+            winner.textContent = "You win the game. You got " + humanScore + " point(s) while the Computer had " + compScore + " point(s).";
             humanScore = 0;
             compScore = 0;
         }
         else {
-            winner.textContent = "Computer wins the game! You had " + humanScore + " points while the Computer had " + compScore + " points.";
+            winner.textContent = "Computer wins the game. You had " + humanScore + " point(s) while the Computer got " + compScore + " point(s).";
             humanScore = 0;
             compScore = 0;
         }
     }
 }
 
-const choices = document.querySelector("#choices");
+const choices = document.querySelector(".choices");
 const result = document.querySelector("#result");
 const winner = document.querySelector("#winner");
 const score = document.querySelector("#score");
