@@ -23,8 +23,6 @@ button {
     border-radius: 20px;
     font-size: 150px;
     background-color: rgb(238, 238, 238);
-    /* smooth transitions for hover/press effects */
-    transition: background-color 150ms ease, transform 100ms ease, filter 120ms ease;
 }
 
 button:hover {
