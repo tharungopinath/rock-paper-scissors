@@ -17,94 +17,59 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice () { 
-    let userInput = prompt("What do you choose (Rock, Paper, or Scissors?): ");
-    userInput = userInput.toLowerCase();
-    if (userInput === "rock") {
-        let humanChoice = "Rock";
-        return humanChoice;
-    }
-    else if (userInput === "paper") {
-        let humanChoice = "Paper";
-        return humanChoice;
-    }
-    else if (userInput === "scissors") {
-        let humanChoice = "Scissors";
-        return humanChoice;
-    }
-    else {
-        let humanChoice = "invalid";
-        return humanChoice;
-    }
-}
-
 function playRound (humanChoice, compChoice){
-    if (humanChoice === "Rock") {
-        if (compChoice === "Rock") {
-            console.log("Both parties chose Rock. The round is a draw!");
-        }
-        else if (compChoice === "Scissors") {
-            console.log("You chose Rock, and the Computer chose Scissors. You win this round!");
-            humanScore++;
-        }
-        else {
-            console.log("You chose Rock, and the Computer chose Paper. The Computer wins this round!");
-            compScore++;
-        }
+    if (humanChoice === compChoice) {
+        result.textContent = "This round is a tie! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
     }
-
-    else if (humanChoice === "Paper"){
-        if (compChoice === "Rock") {
-            console.log("You chose Paper, and the Computer chose Rock. You win this round!");
-            humanScore++;
-        }
-        else if (compChoice === "Scissors") {
-            console.log("You chose Paper, and the Computer chose Scissors. The Computer wins this round!");
-            compScore++;
-        }
-        else {
-            console.log("Both parties chose Paper. The round is a draw!");
-        }
+    else if ((humanChoice == "Rock" && compChoice == "Scissors") || (humanChoice == "Paper" && compChoice == "Rock") || (humanChoice == "Scissors" && compChoice == "Paper")){
+        result.textContent = "You win this round! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
+        humanScore++;
     }
-
-    else if (humanChoice === "Scissors"){
-        if (compChoice === "Rock") {
-            console.log("You chose Scissors, and the Computer chose Rock. The Computer wins this round!");
-            compScore++;
-        }
-        else if (compChoice === "Paper") {
-            console.log("You chose Scissors, and the Computer chose Paper. You win this round!");
-            humanScore++;
-        }
-        else {
-            console.log("Both parties chose Scissors. The round is a draw!");
-        }
-    }
-
     else {
-        console.log("Your input was invalid. The Computer automatically wins this round.")
+        result.textContent = "Computer wins this round! (Computer Chose " + compChoice + " and you chose " + humanChoice + ".";
         compScore++;
     }
 }
 
-function playGame () {
-    for (let i = 0; i < 3; i++){
-        let compChoice = getComputerChoice();
-        let humanChoice = getHumanChoice();
-        playRound(humanChoice, compChoice);
+function gameOver () {
+    if (humanScore == 5 || compScore == 5){
+        if (humanScore > compScore) {
+            winner.textContent = "You win the game! You had " + humanScore + " points while the Computer had " + compScore + " points.";
+            humanScore = 0;
+            compScore = 0;
+        }
+        else {
+            winner.textContent = "Computer wins the game! You had " + humanScore + " points while the Computer had " + compScore + " points.";
+            humanScore = 0;
+            compScore = 0;
+        }
     }
-    if (humanScore === compScore){
-        console.log("After those 5 rounds, both teams had a score of " + humanScore + " point(s), so this game is a draw!");
-    }
-    else if (humanScore > compScore){
-        console.log("After those 5 rounds, you scored " + humanScore + " point(s), while the Computer scored " + compScore + " point(s), so you win this game!");
-    }
-    else {
-        console.log("After those 5 rounds, you scored " + humanScore + " point(s), while the Computer scored " + compScore + " point(s), so the Commputer wins this game!");
-    }
-
-    humanScore = 0;
-    compScore = 0;
 }
 
-playGame();
+const choices = document.querySelector("#choices");
+const result = document.querySelector("#result");
+const winner = document.querySelector("#winner");
+const score = document.querySelector("#score");
+
+choices.addEventListener("click", (event)=> {
+    let target = event.target;
+    if(winner.textContent != ""){
+        winner.textContent = "";
+    }
+    switch (target.id) {
+        case "rock":
+            playRound("Rock", getComputerChoice());
+            gameOver();
+            break;
+        case "paper": 
+            playRound("Paper", getComputerChoice());
+            gameOver();
+            break;
+        case "scissors":
+            playRound("Scissors", getComputerChoice());
+            gameOver();
+            break;
+    }
+    score.textContent = "You: " + humanScore + ", Computer: " + compScore;
+});
+
