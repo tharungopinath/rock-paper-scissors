@@ -55,11 +55,15 @@ The core game logic is entirely handled by event listeners attached to the choic
 ---
 
 ## 📂 Project Structure
+
+```plaintext
 rock-paper-scissors/
-├── index.html # Game structure and link to scripts/styles.
-├── styles.css # Controls visual presentation and layout.
-├── script.js # All game logic (getComputerChoice, playRound, gameOver).
-└── README.md # Project documentation.
+│
+├── index.html       # Game structure and links to scripts/styles
+├── styles.css       # Controls visual presentation and layout
+├── script.js        # All game logic (getComputerChoice, playRound, gameOver)
+└── README.md        # Project documentation
+```
 
 ---
 
